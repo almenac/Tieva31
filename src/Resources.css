@@ -1,0 +1,6 @@
+.Slider-group {
+	display: flex;
+	height: 150px;
+	flex-direction: row;
+	justify-content: space-around;
+}
