@@ -9,6 +9,7 @@ import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
 import people from './peopleData'
 
+
 class PersonInfoItem extends Component {
     render() {
         return (

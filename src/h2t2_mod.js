@@ -8,12 +8,19 @@ import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 
+let pop = new Population("NZ");
+let people = [];
+        
+for(var i = 0; i < 5; i++){
+    people.push(pop.nextPerson())
+}
+
+
 class App extends Component {
     constructor() {
         super();
         this.state = {
-            drawerOpen: false,
-            people: [],
+            drawerOpen: false,            
             currentPerson: 0,
             maxPeople: 5,
             targetField: null                        
@@ -47,17 +54,14 @@ class App extends Component {
     }
 
     updateValue = (field, newValue) => {
-        this.state.people[this.state.currentPerson][field] = newValue;
+        people[this.state.currentPerson][field] = newValue;
+        this.setState({
+
+        })
     }
 
     render() {        
-        let pop = new Population("NZ");
-        let ind = this.state.currentPerson;
-        let max = this.state.maxPeople;        
-        
-        for(var i = 0; i < max; i++){
-            this.state.people.push(pop.nextPerson())
-        }
+        let ind = this.state.currentPerson;               
 
         return (
             <MuiThemeProvider>
@@ -75,25 +79,41 @@ class App extends Component {
 
                     <Paper style={{width: 600, margin: 'auto'}}>
                         <div>
-                            <strong>Index: </strong> <TextField id="index" value={this.state.currentPerson}></TextField>
+                            <strong>Index: </strong> 
+                            <TextField 
+                                id="index" 
+                                value={this.state.currentPerson}
+                            />                            
                         </div>
                         <div>
-                            <strong>First name: </strong> <TextField id="firstName" value={this.state.people[ind].firstName}></TextField>
+                            <strong>First name: </strong> 
+                            <TextField 
+                                id="firstName" 
+                                value={people[ind].firstName}
+                                onChange={(e,v) => {this.updateValue("firstName", v)}}
+                            />
                         </div> 
                         <div>
-                            <strong>Last name: </strong> <TextField id="lastName" value={this.state.people[ind].lastName}></TextField>
+                            <strong>Last name: </strong>
+                            <TextField 
+                                id="lastName" 
+                                value={people[ind].lastName}
+                            />
                         </div> 
                         <div>
                             <strong>Birth town: </strong> 
                             <TextField 
                                 id="birthTown" 
-                                value={this.state.people[ind].birthTown} 
+                                value={people[ind].birthTown} 
                                 onChange={(e,v) => {this.updateValue("birthTown", v)}}
-                                >
-                            </TextField>
+                            />                            
                         </div> 
                         <div>
-                            <strong>Birth Year: </strong> <TextField id="birthYear" value={this.state.people[ind].birthYear}></TextField>
+                            <strong>Birth Year: </strong>
+                            <TextField 
+                                id="birthYear" 
+                                value={people[ind].birthYear}
+                            />
                         </div>
                     </Paper>
                 </div>
